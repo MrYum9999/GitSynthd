@@ -1,0 +1,13 @@
+name: Build Windows VST3
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: cmake -B build
+      - run: cmake --build build --config Release --target GitSynthd_VST3
+      - uses: actions/upload-artifact@v6
+        with:
+          name: GitSynthd-VST3
+          path: build/GitSynthd_artefacts/Release/VST3/
